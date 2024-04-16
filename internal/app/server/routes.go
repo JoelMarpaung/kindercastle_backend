@@ -1,8 +1,11 @@
 package server
 
 import (
+	"kindercastle_backend/internal/app/handler/book"
 	"kindercastle_backend/internal/model/payload"
 	"net/http"
+
+	_ "kindercastle_backend/docs"
 
 	"github.com/labstack/echo/v4"
 	echoSwagger "github.com/swaggo/echo-swagger"
@@ -15,6 +18,9 @@ import (
 //
 // Router list
 func (srv *Server) initRoutes() {
+	var (
+		bookHandler = book.New(srv.services)
+	)
 
 	srv.E.GET("/", func(c echo.Context) error {
 		resp := payload.ResponseData[map[string]string]{
@@ -28,5 +34,14 @@ func (srv *Server) initRoutes() {
 	if srv.conf.EnableDocs {
 		srv.E.GET("/docs/*", echoSwagger.WrapHandler)
 	}
+
+	v1 := srv.E.Group("/v1")
+
+	v1books := v1.Group("/books")
+	v1books.POST("", bookHandler.CreateBook)
+	v1books.GET("", bookHandler.ListBook)
+	v1books.PUT("/:book_id", bookHandler.UpdateBook)
+	v1books.GET("/:book_id", bookHandler.DetailBook)
+	v1books.DELETE("/:book_id", bookHandler.DeleteBook)
 
 }

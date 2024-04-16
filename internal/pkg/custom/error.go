@@ -35,4 +35,6 @@ var (
 	ErrNoFileSelected        = &ErrorCustom{StatusCode: http.StatusBadRequest, Message: "no file selected"}
 	ErrMaxFileSize           = &ErrorCustom{StatusCode: http.StatusBadRequest, Message: "file uploaded exceed maximum size"}
 	ErrInvalidImageExtension = &ErrorCustom{StatusCode: http.StatusBadRequest, Message: "file is not an image / image not supported"}
+
+	ErrInvalidBook = &ErrorCustom{StatusCode: http.StatusNotFound, Message: "invalid book"}
 )

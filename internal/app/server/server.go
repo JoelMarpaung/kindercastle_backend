@@ -10,20 +10,26 @@ import (
 	"strings"
 	"time"
 
+	"kindercastle_backend/internal/app/repository"
+	"kindercastle_backend/internal/app/repository/book"
+	bookSvc "kindercastle_backend/internal/app/service/book"
+
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 
 	"kindercastle_backend/internal/app/appcontext"
 	"kindercastle_backend/internal/app/config"
+	"kindercastle_backend/internal/app/service"
 	"kindercastle_backend/internal/pkg"
 	"kindercastle_backend/internal/pkg/custom"
 	"kindercastle_backend/internal/pkg/logging"
 )
 
 type Server struct {
-	E    *echo.Echo
-	conf *config.Config
-	opt  *pkg.Options
+	E        *echo.Echo
+	services *service.Container
+	conf     *config.Config
+	opt      *pkg.Options
 }
 
 func NewHTTPServer(conf *config.Config) Server {
@@ -114,5 +120,14 @@ func (srv *Server) initContainers() {
 		DB:     appCtx.GetDBConnection(),
 	}
 
+	repositories := &repository.Container{
+		Book: book.New(opts),
+	}
+
+	services := &service.Container{
+		Book: bookSvc.New(opts, repositories),
+	}
+
 	srv.opt = opts
+	srv.services = services
 }

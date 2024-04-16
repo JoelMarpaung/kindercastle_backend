@@ -25,4 +25,5 @@ migrate-reset:
 	go run main.go db:migrate reset
 
 generate-docs:
-	swag init -g internal/app/server/routes.go --parseDependency true --parseInternal true
+	`go env GOPATH`/bin/swag fmt
+	`go env GOPATH`/bin/swag init -g internal/app/server/routes.go --parseDependency true --parseInternal true
