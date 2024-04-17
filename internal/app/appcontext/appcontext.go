@@ -8,6 +8,7 @@ import (
 	"github.com/jmoiron/sqlx"
 
 	"kindercastle_backend/internal/app/config"
+	"kindercastle_backend/internal/pkg/firebaseclient"
 )
 
 type AppContext struct {
@@ -38,4 +39,8 @@ func (ac AppContext) GetDBConnection() *sqlx.DB {
 	}
 
 	return db
+}
+
+func (ac AppContext) GetFirebaseCLient() firebaseclient.FirebaseClient {
+	return firebaseclient.NewFirebaseClient(ac.conf.FirebaseCredPath)
 }

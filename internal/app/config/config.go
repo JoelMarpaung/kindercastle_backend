@@ -22,7 +22,8 @@ type Config struct {
 	DBMaxOpen int    `envconfig:"db_max_open" default:"10"`
 	DBMaxIdle int    `envconfig:"db_max_idle" default:"10"`
 
-	EnableDocs bool `envconfig:"enable_docs" default:"false"`
+	EnableDocs       bool   `envconfig:"enable_docs" default:"false"`
+	FirebaseCredPath string `envconfig:"firebase_cred_path" default:""`
 }
 
 var (

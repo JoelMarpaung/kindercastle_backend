@@ -13,6 +13,7 @@ import (
 	"kindercastle_backend/internal/app/repository"
 	"kindercastle_backend/internal/app/repository/book"
 	bookSvc "kindercastle_backend/internal/app/service/book"
+	"kindercastle_backend/internal/app/service/firebase"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -116,8 +117,9 @@ func (srv *Server) initContainers() {
 	appCtx := appcontext.NewAppContext(srv.conf)
 
 	opts := &pkg.Options{
-		Config: srv.conf,
-		DB:     appCtx.GetDBConnection(),
+		Config:         srv.conf,
+		DB:             appCtx.GetDBConnection(),
+		FirebaseClient: appCtx.GetFirebaseCLient(),
 	}
 
 	repositories := &repository.Container{
@@ -125,7 +127,8 @@ func (srv *Server) initContainers() {
 	}
 
 	services := &service.Container{
-		Book: bookSvc.New(opts, repositories),
+		Book:        bookSvc.New(opts, repositories),
+		FirebaseSvc: firebase.New(opts, repositories),
 	}
 
 	srv.opt = opts

@@ -14,12 +14,16 @@ import (
 //	@title						KinderCastle API
 //	@schemes					https http
 //	@BasePath					/
-//	@securityDefinitions.basic	BasicAuth
+//	@securityDefinitions.apikey	JWTToken
+//	@in							header
+//	@name						Authorization
+//	@securityDefinitions.basic	FirebaseAuth
 //
 // Router list
 func (srv *Server) initRoutes() {
 	var (
-		bookHandler = book.New(srv.services)
+		bookHandler    = book.New(srv.services)
+		authMiddleware = NewMidleware(srv.services.FirebaseSvc)
 	)
 
 	srv.E.GET("/", func(c echo.Context) error {
@@ -38,6 +42,7 @@ func (srv *Server) initRoutes() {
 	v1 := srv.E.Group("/v1")
 
 	v1books := v1.Group("/books")
+	v1books.Use(authMiddleware.isAuthenticated)
 	v1books.POST("", bookHandler.CreateBook)
 	v1books.GET("", bookHandler.ListBook)
 	v1books.PUT("/:book_id", bookHandler.UpdateBook)
