@@ -10,6 +10,7 @@ var (
 
 type Book struct {
 	ID              string    `db:"id"`
+	UserID          string    `db:"user_id"`
 	Title           string    `db:"title"`
 	Author          string    `db:"author"`
 	Isbn            string    `db:"isbn"`

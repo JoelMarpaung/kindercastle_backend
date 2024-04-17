@@ -4,6 +4,7 @@ import "time"
 
 type Book struct {
 	ID              string    `json:"id"`
+	UserID          string    `json:"user_id"`
 	Title           string    `json:"title"`
 	Author          string    `json:"author"`
 	Isbn            string    `json:"isbn"`
@@ -22,32 +23,34 @@ type Book struct {
 }
 
 type CreateBookPayload struct {
-	Title           string    `json:"title"`
-	Author          string    `json:"author"`
+	UserID          string    `json:"user_id"`
+	Title           string    `json:"title" validate:"required"`
+	Author          string    `json:"author" validate:"required"`
 	Isbn            string    `json:"isbn"`
 	Publisher       string    `json:"publisher"`
 	PublicationDate time.Time `json:"publication_date"`
 	Edition         string    `json:"edition"`
-	Genre           string    `json:"genre"`
-	Language        string    `json:"language"`
-	NumberOfPages   int       `json:"number_of_pages"`
-	Description     string    `json:"description"`
+	Genre           string    `json:"genre" validate:"required"`
+	Language        string    `json:"language" validate:"required"`
+	NumberOfPages   int       `json:"number_of_pages" validate:"required"`
+	Description     string    `json:"description" validate:"required"`
 	Price           float64   `json:"price"`
-	Format          string    `json:"format"`
+	Format          string    `json:"format" validate:"required"`
 }
 
 type EditBookPayload struct {
 	ID              string    `json:"-"`
-	Title           string    `json:"title"`
-	Author          string    `json:"author"`
+	UserID          string    `json:"user_id"`
+	Title           string    `json:"title" validate:"required"`
+	Author          string    `json:"author" validate:"required"`
 	Isbn            string    `json:"isbn"`
 	Publisher       string    `json:"publisher"`
 	PublicationDate time.Time `json:"publication_date"`
 	Edition         string    `json:"edition"`
-	Genre           string    `json:"genre"`
-	Language        string    `json:"language"`
-	NumberOfPages   int       `json:"number_of_pages"`
-	Description     string    `json:"description"`
+	Genre           string    `json:"genre" validate:"required"`
+	Language        string    `json:"language" validate:"required"`
+	NumberOfPages   int       `json:"number_of_pages" validate:"required"`
+	Description     string    `json:"description" validate:"required"`
 	Price           float64   `json:"price"`
-	Format          string    `json:"format"`
+	Format          string    `json:"format" validate:"required"`
 }

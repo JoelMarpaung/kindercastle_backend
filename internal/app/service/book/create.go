@@ -9,9 +9,9 @@ import (
 	"kindercastle_backend/internal/model/payload"
 )
 
-func (s service) Create(ctx context.Context, data payload.CreateBookPayload) error {
+func (s service) Create(ctx context.Context, data payload.CreateBookPayload, userID string) error {
 	err := dbase.WithTransaction(ctx, s.DB, func(ctx context.Context) error {
-		_, err := s.Book.Create(ctx, data)
+		_, err := s.Book.Create(ctx, data, userID)
 
 		return err
 	})

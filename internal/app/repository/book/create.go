@@ -12,7 +12,7 @@ import (
 	"kindercastle_backend/internal/pkg/dbase"
 )
 
-func (r repository) Create(ctx context.Context, data payload.CreateBookPayload) (string, error) {
+func (r repository) Create(ctx context.Context, data payload.CreateBookPayload, userID string) (string, error) {
 	genUUID, err := uuid.NewRandom()
 	if err != nil {
 		return "", err
@@ -24,6 +24,7 @@ func (r repository) Create(ctx context.Context, data payload.CreateBookPayload) 
 	}
 
 	bookMap := sq.Eq{
+		"user_id":          userID,
 		"title":            data.Title,
 		"author":           data.Author,
 		"isbn":             data.Isbn,

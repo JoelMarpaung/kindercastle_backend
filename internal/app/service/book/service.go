@@ -9,9 +9,9 @@ import (
 )
 
 type IService interface {
-	Create(ctx context.Context, data payload.CreateBookPayload) error
-	Edit(ctx context.Context, data payload.EditBookPayload) error
-	Delete(ctx context.Context, bookID string) error
+	Create(ctx context.Context, data payload.CreateBookPayload, userID string) error
+	Edit(ctx context.Context, data payload.EditBookPayload, userID string) error
+	Delete(ctx context.Context, bookID string, userID string) error
 	Detail(ctx context.Context, bookID string) (payload.Book, error)
 	GetAll(ctx context.Context, param payload.PagingAndFilterPayload) ([]payload.Book, int64, error)
 }

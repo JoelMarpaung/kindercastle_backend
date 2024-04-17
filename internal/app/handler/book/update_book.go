@@ -21,9 +21,10 @@ import (
 //	@Router			/v1/books/{book_id} [put]
 func (h Handler) UpdateBook(c echo.Context) error {
 	var (
-		body payload.EditBookPayload
-		ctx  = c.Request().Context()
-		id   = c.Param("book_id")
+		body   payload.EditBookPayload
+		ctx    = c.Request().Context()
+		id     = c.Param("book_id")
+		userID = c.Get("uid").(string)
 	)
 
 	if err := c.Bind(&body); err != nil {
@@ -35,7 +36,7 @@ func (h Handler) UpdateBook(c echo.Context) error {
 	}
 
 	body.ID = id
-	if err := h.Book.Edit(ctx, body); err != nil {
+	if err := h.Book.Edit(ctx, body, userID); err != nil {
 		return err
 	}
 

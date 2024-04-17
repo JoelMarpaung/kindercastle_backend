@@ -9,7 +9,7 @@ import (
 	"kindercastle_backend/internal/pkg/dbase"
 )
 
-func (s service) Delete(ctx context.Context, bookID string) error {
+func (s service) Delete(ctx context.Context, bookID string, userID string) error {
 	book, err := s.Book.GetByID(ctx, bookID)
 	if err != nil && errors.Is(err, sql.ErrNoRows) {
 		return custom.ErrInvalidBook
@@ -19,6 +19,6 @@ func (s service) Delete(ctx context.Context, bookID string) error {
 	}
 
 	return dbase.WithTransaction(ctx, s.DB, func(ctx context.Context) error {
-		return s.Book.DeleteByID(ctx, book.ID)
+		return s.Book.DeleteByID(ctx, book.ID, userID)
 	})
 }

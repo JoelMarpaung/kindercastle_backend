@@ -10,10 +10,11 @@ import (
 	"kindercastle_backend/internal/pkg/dbase"
 )
 
-func (r repository) EditByID(ctx context.Context, data payload.EditBookPayload) error {
+func (r repository) EditByID(ctx context.Context, data payload.EditBookPayload, userID string) error {
 	query, args, err := sq.
 		Update(db.TableBook).
 		SetMap(sq.Eq{
+			"user_id":          userID,
 			"title":            data.Title,
 			"author":           data.Author,
 			"isbn":             data.Isbn,

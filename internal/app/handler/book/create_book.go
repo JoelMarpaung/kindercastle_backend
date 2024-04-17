@@ -20,8 +20,9 @@ import (
 //	@Router			/v1/books [post]
 func (h Handler) CreateBook(c echo.Context) error {
 	var (
-		body payload.CreateBookPayload
-		ctx  = c.Request().Context()
+		body   payload.CreateBookPayload
+		ctx    = c.Request().Context()
+		userID = c.Get("uid").(string)
 	)
 
 	if err := c.Bind(&body); err != nil {
@@ -32,7 +33,7 @@ func (h Handler) CreateBook(c echo.Context) error {
 		return err
 	}
 
-	if err := h.Book.Create(ctx, body); err != nil {
+	if err := h.Book.Create(ctx, body, userID); err != nil {
 		return err
 	}
 

@@ -18,11 +18,12 @@ import (
 //	@Router			/v1/books/{book_id} [delete]
 func (h Handler) DeleteBook(c echo.Context) error {
 	var (
-		ctx = c.Request().Context()
-		id  = c.Param("book_id")
+		ctx    = c.Request().Context()
+		id     = c.Param("book_id")
+		userID = c.Get("uid").(string)
 	)
 
-	if err := h.Book.Delete(ctx, id); err != nil {
+	if err := h.Book.Delete(ctx, id, userID); err != nil {
 		return err
 	}
 

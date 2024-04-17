@@ -9,13 +9,13 @@ import (
 	"kindercastle_backend/internal/pkg/dbase"
 )
 
-func (r repository) DeleteByID(ctx context.Context, bookID string) error {
+func (r repository) DeleteByID(ctx context.Context, bookID string, userID string) error {
 	tx := dbase.GetTrxFromContext(ctx, r.DB)
 
 	query, args, err := sq.
 		Update(db.TableBook).
 		Set("deleted_at", sq.Expr("NOW()")).
-		Where("id = ? AND is_not_archived = ?", bookID, true).
+		Where("id = ? AND is_not_archived = ? AND user_id = ?", bookID, true, userID).
 		ToSql()
 	if err != nil {
 		return err

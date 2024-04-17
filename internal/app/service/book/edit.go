@@ -11,7 +11,7 @@ import (
 	"kindercastle_backend/internal/pkg/custom"
 )
 
-func (s service) Edit(ctx context.Context, data payload.EditBookPayload) error {
+func (s service) Edit(ctx context.Context, data payload.EditBookPayload, userID string) error {
 	_, err := s.Book.GetByID(ctx, data.ID)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
@@ -21,7 +21,7 @@ func (s service) Edit(ctx context.Context, data payload.EditBookPayload) error {
 	}
 
 	err = dbase.WithTransaction(ctx, s.DB, func(ctx context.Context) error {
-		err := s.Book.EditByID(ctx, data)
+		err := s.Book.EditByID(ctx, data, userID)
 
 		return err
 	})
