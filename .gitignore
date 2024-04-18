@@ -12,3 +12,5 @@ vendor/
 tmp/
 *.pem
 firebase-cred.json
+assets/*
+!assets/.keep

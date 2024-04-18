@@ -2,6 +2,7 @@ package server
 
 import (
 	"kindercastle_backend/internal/app/handler/book"
+	"kindercastle_backend/internal/app/handler/utils"
 	"kindercastle_backend/internal/model/payload"
 	"net/http"
 
@@ -23,6 +24,7 @@ import (
 func (srv *Server) initRoutes() {
 	var (
 		bookHandler    = book.New(srv.services)
+		utilsHandler   = utils.New(srv.services)
 		authMiddleware = NewMidleware(srv.services.FirebaseSvc)
 	)
 
@@ -40,6 +42,9 @@ func (srv *Server) initRoutes() {
 	}
 
 	v1 := srv.E.Group("/v1")
+
+	v1utils := v1.Group("", authMiddleware.isAuthenticated)
+	v1utils.POST("/image", utilsHandler.UploadImage)
 
 	v1books := v1.Group("/books")
 	v1books.Use(authMiddleware.isAuthenticated)

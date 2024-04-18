@@ -14,6 +14,7 @@ import (
 	"kindercastle_backend/internal/app/repository/book"
 	bookSvc "kindercastle_backend/internal/app/service/book"
 	"kindercastle_backend/internal/app/service/firebase"
+	utilsSvc "kindercastle_backend/internal/app/service/utils"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -129,6 +130,7 @@ func (srv *Server) initContainers() {
 	services := &service.Container{
 		Book:        bookSvc.New(opts, repositories),
 		FirebaseSvc: firebase.New(opts, repositories),
+		Utils:       utilsSvc.New(opts, repositories),
 	}
 
 	srv.opt = opts

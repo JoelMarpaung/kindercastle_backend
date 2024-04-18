@@ -17,6 +17,7 @@ type Book struct {
 	Description     string    `json:"description"`
 	Price           float64   `json:"price"`
 	Format          string    `json:"format"`
+	ImageUrl        string    `json:"image_url"`
 
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
@@ -36,6 +37,7 @@ type CreateBookPayload struct {
 	Description     string    `json:"description" validate:"required"`
 	Price           float64   `json:"price"`
 	Format          string    `json:"format" validate:"required"`
+	ImageUrl        string    `json:"image_url"`
 }
 
 type EditBookPayload struct {
@@ -53,4 +55,5 @@ type EditBookPayload struct {
 	Description     string    `json:"description" validate:"required"`
 	Price           float64   `json:"price"`
 	Format          string    `json:"format" validate:"required"`
+	ImageUrl        string    `json:"image_url"`
 }

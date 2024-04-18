@@ -7,10 +7,9 @@ const (
 )
 
 type PagingAndFilterPayload struct {
-	Search  string `query:"search" json:"search" example:"keyword"`
-	Limit   int    `query:"limit" json:"limit" example:"1"`
-	Page    int    `query:"page" json:"page" example:"1"`
-	Usecase string `query:"usecase" json:"usecase" example:"history"`
+	Search string `query:"search" json:"search" example:"keyword"`
+	Limit  int    `query:"limit" json:"limit" example:"1"`
+	Page   int    `query:"page" json:"page" example:"1"`
 }
 
 func (params *PagingAndFilterPayload) Normalize() {

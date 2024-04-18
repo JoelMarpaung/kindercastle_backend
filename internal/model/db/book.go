@@ -23,6 +23,7 @@ type Book struct {
 	Description     string    `db:"description"`
 	Price           float64   `db:"price"`
 	Format          string    `db:"format"`
+	ImageUrl        string    `db:"image_url"`
 
 	CreatedAt     time.Time  `db:"created_at"`
 	UpdatedAt     time.Time  `db:"updated_at"`
