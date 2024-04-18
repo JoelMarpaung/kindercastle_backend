@@ -12,7 +12,7 @@ import (
 //	@Tags			utils
 //	@Accept			multipart/form-data
 //	@Produce		json
-//	@Param			payload	body		payload.UploadImageDocs	true	"Upload Image File"
+//	@Param			payload	body		payload.UploadImage	true	"Upload Image File"
 //	@Success		200		{object}	payload.UploadImageResponse
 //	@Router			/v1/image [post]
 func (h Handler) UploadImage(c echo.Context) error {
