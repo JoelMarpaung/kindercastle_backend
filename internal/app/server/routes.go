@@ -6,10 +6,7 @@ import (
 	"kindercastle_backend/internal/model/payload"
 	"net/http"
 
-	_ "kindercastle_backend/docs"
-
 	"github.com/labstack/echo/v4"
-	echoSwagger "github.com/swaggo/echo-swagger"
 )
 
 //	@title						KinderCastle API
@@ -36,10 +33,6 @@ func (srv *Server) initRoutes() {
 		}
 		return c.JSON(http.StatusOK, resp)
 	})
-
-	if srv.conf.EnableDocs {
-		srv.E.GET("/docs/*", echoSwagger.WrapHandler)
-	}
 
 	v1 := srv.E.Group("/v1")
 
