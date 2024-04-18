@@ -14,10 +14,8 @@ import (
 )
 
 func Start() {
-	rootCmd := &cobra.Command{
-		PersistentPreRun: rootPreRun,
-	}
 	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
 
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, os.Interrupt, syscall.SIGTERM)
@@ -27,6 +25,10 @@ func Start() {
 	}()
 
 	var sqldsn string
+	rootCmd := &cobra.Command{
+		PersistentPreRun: rootPreRun,
+	}
+
 	migrateCmd := &cobra.Command{
 		Use:   "db:migrate",
 		Short: "database migration",
@@ -45,16 +47,18 @@ func Start() {
 		Use:   "serve-http",
 		Short: "Run HTTP Server",
 		Run: func(cmd *cobra.Command, args []string) {
-
 			server.Start(ctx)
 		},
 	}
-	cmd := []*cobra.Command{
-		serveHttpCmd,
-		migrateCmd,
+
+	rootCmd.AddCommand(serveHttpCmd, migrateCmd)
+
+	// Check if no command is provided (i.e., args are empty)
+	if len(os.Args) <= 1 {
+		// No arguments provided, default to running the HTTP server
+		os.Args = append(os.Args, "serve-http")
 	}
 
-	rootCmd.AddCommand(cmd...)
 	if err := rootCmd.Execute(); err != nil {
 		log.Fatal(err)
 	}

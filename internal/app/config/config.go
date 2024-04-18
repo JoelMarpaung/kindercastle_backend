@@ -4,6 +4,7 @@ import (
 	"log"
 	"sync"
 
+	"github.com/joho/godotenv"
 	"github.com/kelseyhightower/envconfig"
 )
 
@@ -32,9 +33,11 @@ var (
 
 func GetConfig() Config {
 	once.Do(func() {
+		_ = godotenv.Load()
+
 		err := envconfig.Process("", &conf)
 		if err != nil {
-			log.Fatal("Error processing environment configuration: ", err)
+			log.Fatal(err)
 		}
 	})
 
