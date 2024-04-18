@@ -50,6 +50,7 @@ func (srv *Server) initRoutes() {
 	v1books.Use(authMiddleware.isAuthenticated)
 	v1books.POST("", bookHandler.CreateBook)
 	v1books.GET("", bookHandler.ListBook)
+	v1books.GET("/me", bookHandler.MyBook)
 	v1books.PUT("/:book_id", bookHandler.UpdateBook)
 	v1books.GET("/:book_id", bookHandler.DetailBook)
 	v1books.DELETE("/:book_id", bookHandler.DeleteBook)

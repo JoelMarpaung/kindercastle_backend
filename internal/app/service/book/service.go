@@ -14,6 +14,7 @@ type IService interface {
 	Delete(ctx context.Context, bookID string, userID string) error
 	Detail(ctx context.Context, bookID string) (payload.Book, error)
 	GetAll(ctx context.Context, param payload.PagingAndFilterPayload, userID string) ([]payload.Book, int64, error)
+	GetMyBook(ctx context.Context, param payload.PagingAndFilterPayload, userID string) ([]payload.Book, int64, error)
 }
 
 type service struct {

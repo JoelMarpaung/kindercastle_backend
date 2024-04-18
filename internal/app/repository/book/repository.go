@@ -14,6 +14,7 @@ type IRepository interface {
 	GetByID(ctx context.Context, bookID string) (db.Book, error)
 	GetAll(ctx context.Context, param payload.PagingAndFilterPayload, userID string) ([]db.Book, int64, error)
 	DeleteByID(ctx context.Context, bookID string, userID string) error
+	GetMyBook(ctx context.Context, param payload.PagingAndFilterPayload, userID string) ([]db.Book, int64, error)
 }
 
 type repository struct {
