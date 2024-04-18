@@ -37,6 +37,7 @@ func (r repository) Create(ctx context.Context, data payload.CreateBookPayload, 
 		"description":      data.Description,
 		"price":            data.Price,
 		"format":           data.Format,
+		"image_url":        data.ImageUrl,
 	}
 
 	query, args, err := sq.

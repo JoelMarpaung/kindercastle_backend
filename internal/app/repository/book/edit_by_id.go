@@ -27,6 +27,7 @@ func (r repository) EditByID(ctx context.Context, data payload.EditBookPayload, 
 			"description":      data.Description,
 			"price":            data.Price,
 			"format":           data.Format,
+			"image_url":        data.ImageUrl,
 		}).
 		Where("id = ? AND is_not_archived = ?", data.ID, true).
 		ToSql()

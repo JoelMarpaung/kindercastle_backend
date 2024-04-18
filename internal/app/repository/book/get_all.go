@@ -20,6 +20,7 @@ func (r repository) GetAll(ctx context.Context, param payload.PagingAndFilterPay
 
 	query, args, err := r.
 		baseGetAllQuery(param, helper.ImplodeStructTag(db.Book{}, "db")).
+		OrderBy("created_at DESC").
 		Limit(uint64(param.Limit)).
 		Offset(uint64(param.GetOffset())).
 		ToSql()
