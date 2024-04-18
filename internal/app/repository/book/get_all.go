@@ -11,7 +11,7 @@ import (
 	"kindercastle_backend/internal/pkg/dbase"
 )
 
-func (r repository) GetAll(ctx context.Context, param payload.PagingAndFilterPayload) ([]db.Book, int64, error) {
+func (r repository) GetAll(ctx context.Context, param payload.PagingAndFilterPayload, userID string) ([]db.Book, int64, error) {
 	var (
 		tx    = dbase.GetTrxFromContext(ctx, r.DB)
 		items = make([]db.Book, 0)

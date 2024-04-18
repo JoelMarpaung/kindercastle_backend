@@ -13,7 +13,7 @@ type IService interface {
 	Edit(ctx context.Context, data payload.EditBookPayload, userID string) error
 	Delete(ctx context.Context, bookID string, userID string) error
 	Detail(ctx context.Context, bookID string) (payload.Book, error)
-	GetAll(ctx context.Context, param payload.PagingAndFilterPayload) ([]payload.Book, int64, error)
+	GetAll(ctx context.Context, param payload.PagingAndFilterPayload, userID string) ([]payload.Book, int64, error)
 }
 
 type service struct {

@@ -18,6 +18,7 @@ type Book struct {
 	Price           float64   `json:"price"`
 	Format          string    `json:"format"`
 	ImageUrl        string    `json:"image_url"`
+	BookOwnership   bool      `json:"book_ownership"`
 
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`

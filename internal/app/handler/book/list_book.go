@@ -23,8 +23,9 @@ import (
 //	@Router			/v1/books [get]
 func (h Handler) ListBook(c echo.Context) error {
 	var (
-		ctx   = c.Request().Context()
-		param payload.PagingAndFilterPayload
+		ctx    = c.Request().Context()
+		param  payload.PagingAndFilterPayload
+		userID = c.Get("uid").(string)
 	)
 
 	if err := c.Bind(&param); err != nil {
@@ -33,7 +34,7 @@ func (h Handler) ListBook(c echo.Context) error {
 
 	param.Normalize()
 
-	items, count, err := h.Book.GetAll(ctx, param)
+	items, count, err := h.Book.GetAll(ctx, param, userID)
 	if err != nil {
 		return err
 	}
