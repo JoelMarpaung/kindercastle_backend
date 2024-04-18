@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "kindercastle-bec2d",
+  "private_key_id": "7d09db1ee49d9776e9e58657e8df42f663e7a173",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDPyl025O0eZuBc\nOjUl4lYyHsGegYmTqNugZWj1ndOvGt5qE0HJjhpm4y1lWqgKWx0cIV3m7ZxzUZqu\ncjNFK+EupMx38I77XZjPyU/M6KpF1wIbbTTaefBFxIH+FYmfoWkNAC/XlxRHF3v7\nysDnsR6sN06XsBrzPpSB9i8AaFFTBlQWs2A2A2Bq37rGSyEUXCpv7Be1Q8QzaZrw\noseRUyXvHDJrsc5r3k9NiyF/VlPu7ocwhf1WyE6egxoEGG28xjQJPiFT3gob0sCS\nnQqIYjwiA0ItzapEwzLhWEFLrox7c/XNH9cJ4dmAYuDvhlylBwNF302g1gdnkDa6\nKkKuREYnAgMBAAECggEAUoyeg5Rm71EHiRxGyQomHDtDyGjF8zd+KTaggBN3aXVP\nLuz/kcc2jfFqs31UjOito+NNntR+9wFQZkVQQQaxqwolgPC8nPgOIV5kqY81NhG4\n8JRuDu2qmsz6p6p+xkAlr9iHKSsID0YxJ1LhWCpxeRFv06tOyZvu+8KF4a+Pv19o\nm0N2zNJHZ642bgj+PGX1yKJJr3rt5UHpId+7s6wPDeYHEcf7ohD3iBbS2F9chhI6\n66n1Jz951qELTTkKWEf8NFeGZWCF/IbKm4tMPqIjAi66IPczxzxIrerJITchMTN4\nJgPjmhJsBk51qu/VrGpMQ3yjPiHz6zvcUHdUiF8IgQKBgQD2MmIf+N01U/FUuLXe\n6GzWeSqMM+9tkkGbn08Apb4QtkCJMSCtoJEfTtRztR0qfA1qEVAAF9pGWTyOxhiK\nMMgGrK5eBTqd/lBIZak9uzHTdEUxiOakhOwTv952SIgAq4WA2hTYtKEMbZE3CdYI\nq9vEvWOgeocOSW2wZ7W4RuR3lwKBgQDYEHwFmEQ23o4jEkTdbvOX8LLQCk9yq4qT\nFU0JPJrWbpKJaZ12v+3f8p229jZIMNs0WPBd6FGQ9id+UdGP6v3bl0i+vGtiE2Tm\n0+PflRS0TrQml+kPcKD2/gtnEwmTUi+7S+Ovz4zOPwp++WrxkRoCz/n6XejaExXT\nU8vD3jv38QKBgEMOMf+3TrjJpj+HF7Ig6BP6aIZLVvknDsuONnxcqEnw+d7kDJx9\n0UkPtXnWaJ07sIOlN37vADqM75uLhP+OjcyTl+Jv1ilWLROq7M+tfsKzNm1pdjh1\nI7+1UKgy1Sgpj3Eq9OaZPAwgg57UBQHTnUYWt13sQYC4qzGS7cHFPVD9AoGACWmW\nbYv3lMhXOtHl7BuUQw86SvPYCC/O5p9r7rYULLk+avwN3wl3bGUeV8UcEkMGmZ4y\nQnUHcKA4kjkwPuvGyVUq1xxQNUKRB7k9WRUehMhU8sV1YrXOXVQt3PyoUyGmcKta\nrOMGyElYxLVK4mEm1+6FflGu/ikMr1scKlk5FZECgYBCo6MmZydrYxIO+PbuKf+/\nsDl2kfBXGDIov9SdEoyIR0EAiQmo8vKKNaBsjjlXmW3Rl5B85xh3kcGut/Ct1y1T\nHsD2BNTZcpbxLZm1pjXrk7icSDPz2Oz4kkEbGZAncTFLiTNX1GZV+rX69yMSKZBe\nPMFCR1Rkypn2YqTGSX7lLg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-kvrsf@kindercastle-bec2d.iam.gserviceaccount.com",
+  "client_id": "112217633351305470704",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-kvrsf%40kindercastle-bec2d.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

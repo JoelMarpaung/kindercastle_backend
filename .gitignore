@@ -11,6 +11,5 @@ vendor/
 /docs/swagger.yaml
 tmp/
 *.pem
-firebase-cred.json
 assets/*
 !assets/.keep
