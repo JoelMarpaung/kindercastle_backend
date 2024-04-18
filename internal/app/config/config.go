@@ -2,28 +2,29 @@ package config
 
 import (
 	"log"
+	"os"
+	"strconv"
 	"sync"
 
 	"github.com/joho/godotenv"
-	"github.com/kelseyhightower/envconfig"
 )
 
 //go:generate easytags $GOFILE envconfig
 
 type Config struct {
-	AppPort string `envconfig:"app_port" default:"1337"`
-	AppEnv  string `envconfig:"app_env"`
+	AppPort string
+	AppEnv  string
 
-	DBName    string `envconfig:"db_name"`
-	DBHost    string `envconfig:"db_host"`
-	DBPort    string `envconfig:"db_port"`
-	DBUser    string `envconfig:"db_user"`
-	DBPass    string `envconfig:"db_pass"`
-	DBMaxOpen int    `envconfig:"db_max_open" default:"10"`
-	DBMaxIdle int    `envconfig:"db_max_idle" default:"10"`
+	DBName    string
+	DBHost    string
+	DBPort    string
+	DBUser    string
+	DBPass    string
+	DBMaxOpen int
+	DBMaxIdle int
 
-	EnableDocs       bool   `envconfig:"enable_docs" default:"false"`
-	FirebaseCredPath string `envconfig:"firebase_cred_path" default:""`
+	EnableDocs       bool
+	FirebaseCredPath string
 }
 
 var (
@@ -33,13 +34,45 @@ var (
 
 func GetConfig() Config {
 	once.Do(func() {
-		_ = godotenv.Load()
-
-		err := envconfig.Process("", &conf)
-		if err != nil {
-			log.Fatal(err)
+		if os.Getenv("APP_ENV") != "production" {
+			if err := godotenv.Load(); err != nil {
+				log.Printf("No .env file found or error loading .env file")
+			}
 		}
+
+		conf.AppPort = os.Getenv("PORT")
+		conf.AppEnv = os.Getenv("APP_ENV")
+		conf.DBName = os.Getenv("DB_NAME")
+		conf.DBHost = os.Getenv("DB_HOST")
+		conf.DBPort = os.Getenv("DB_PORT")
+		conf.DBUser = os.Getenv("DB_USER")
+		conf.DBPass = os.Getenv("DB_PASS")
+		conf.DBMaxOpen = getIntEnv("DB_MAX_OPEN", 10)
+		conf.DBMaxIdle = getIntEnv("DB_MAX_IDLE", 10)
+
+		conf.EnableDocs = getBoolEnv("ENABLE_DOCS", false)
+		conf.FirebaseCredPath = os.Getenv("FIREBASE_CRED_PATH")
 	})
 
 	return conf
+}
+
+func getIntEnv(key string, defaultValue int) int {
+	if value, exists := os.LookupEnv(key); exists {
+		intValue, err := strconv.Atoi(value)
+		if err == nil {
+			return intValue
+		}
+	}
+	return defaultValue
+}
+
+func getBoolEnv(key string, defaultValue bool) bool {
+	if value, exists := os.LookupEnv(key); exists {
+		boolValue, err := strconv.ParseBool(value)
+		if err == nil {
+			return boolValue
+		}
+	}
+	return defaultValue
 }
