@@ -39,6 +39,10 @@ func (h Handler) ListBook(c echo.Context) error {
 		return err
 	}
 
+	if items == nil {
+		items = []payload.Book{}
+	}
+
 	return c.JSON(http.StatusOK, payload.PaginatedResponse[payload.Book]{
 		Page:      param.Page,
 		Limit:     param.Limit,
