@@ -25,6 +25,8 @@ func (srv *Server) initRoutes() {
 		authMiddleware = NewMidleware(srv.services.FirebaseSvc)
 	)
 
+	srv.E.Static("/assets", "assets")
+
 	srv.E.GET("/", func(c echo.Context) error {
 		resp := payload.ResponseData[map[string]string]{
 			Data: map[string]string{
