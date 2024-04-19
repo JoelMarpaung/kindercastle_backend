@@ -4,8 +4,8 @@ import (
 	"context"
 	"database/sql"
 	"errors"
+	"net/url"
 	"os"
-	"path"
 
 	"github.com/jinzhu/copier"
 
@@ -23,6 +23,12 @@ func (s service) Detail(ctx context.Context, bookID string) (payload.Book, error
 		return res, custom.ErrInternalServer
 	}
 
+	base, err := url.Parse(baseURL)
+	if err != nil {
+		logging.Logger().Err(err).Msg("invalid base URL")
+		return payload.Book{}, custom.ErrInternalServer
+	}
+
 	book, err := s.Book.GetByID(ctx, bookID)
 	if err != nil {
 		if errors.Is(err, sql.ErrNoRows) {
@@ -38,7 +44,10 @@ func (s service) Detail(ctx context.Context, bookID string) (payload.Book, error
 		return res, custom.ErrInternalServer
 	}
 
-	res.ImageUrl = path.Join(baseURL, res.ImageUrl)
+	imageEndpoint, _ := url.Parse(res.ImageUrl)
+	imageUrl := base.ResolveReference(imageEndpoint).String()
+
+	res.ImageUrl = imageUrl
 
 	return res, nil
 }
