@@ -5,10 +5,18 @@ import (
 	"kindercastle_backend/internal/model/payload"
 	"kindercastle_backend/internal/pkg/custom"
 	"kindercastle_backend/internal/pkg/logging"
+	"os"
+	"path"
 )
 
 func (s service) GetAll(ctx context.Context, param payload.PagingAndFilterPayload, userID string) ([]payload.Book, int64, error) {
 	var items = make([]payload.Book, 0)
+
+	baseURL := os.Getenv("BASE_URL")
+	if baseURL == "" {
+		logging.Logger().Error().Msg("BASE_URL is not set")
+		return nil, 0, custom.ErrInternalServer
+	}
 
 	books, count, err := s.Book.GetAll(ctx, param, userID)
 	if err != nil {
@@ -20,6 +28,7 @@ func (s service) GetAll(ctx context.Context, param payload.PagingAndFilterPayloa
 
 	for _, data := range books {
 		bookOwnership := data.UserID == userID
+		imageUrl := path.Join(baseURL, data.ImageUrl)
 		res := payload.Book{
 			ID:              data.ID,
 			UserID:          data.UserID,
@@ -35,7 +44,7 @@ func (s service) GetAll(ctx context.Context, param payload.PagingAndFilterPayloa
 			Description:     data.Description,
 			Price:           data.Price,
 			Format:          data.Format,
-			ImageUrl:        data.ImageUrl,
+			ImageUrl:        imageUrl,
 			BookOwnership:   bookOwnership,
 			CreatedAt:       data.CreatedAt,
 			UpdatedAt:       data.UpdatedAt,
